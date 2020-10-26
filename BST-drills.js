@@ -1,5 +1,10 @@
 'use strict';
 
+// 3. Create a BST class
+// write a BinarySearchTree class with its core functions (insert(), remove(), find()) from scratch.
+// Create a binary search tree called BST and insert 3,1,4,6,9,2,5,7 into your tree. Compare your result with the result from the 1st exercise.
+// Create a binary search tree called BST and insert E A S Y Q U E S T I O N into your tree. Compare your result with the result from the 1st exercise.
+
 class BinarySearchTree {
     constructor(key = null, value = null, parent = null) {
         this.key = key;
@@ -145,20 +150,37 @@ const drill3a = bst => {
 // console.log(drill3a(BST));
 
 const drill3b = bst => {
-    bst.insert('E');
-    bst.insert('A');
-    bst.insert('S');
-    bst.insert('Y');
-    bst.insert('Q');
-    bst.insert('U');
-    bst.insert('E');
-    bst.insert('S');
-    bst.insert('T');
-    bst.insert('I');
-    bst.insert('O');
-    bst.insert('N');
+    bst.insert('E', 1);
+    bst.insert('A', 1);
+    bst.insert('S', 1);
+    bst.insert('Y', 1);
+    bst.insert('Q', 1);
+    bst.insert('U', 1);
+    bst.insert('E', 1);
+    bst.insert('S', 1);
+    bst.insert('T', 1);
+    bst.insert('I', 1);
+    bst.insert('O', 1);
+    bst.insert('N', 1);
 
     return bst;
 }
 
 console.log(drill3b(BST));
+
+// 4. What does this program do?
+// Without running this code in your code editor, explain what the following program does. 
+// Show with an example the result of executing this program. 
+// What is the runtime of this algorithm?
+
+function tree(t){
+    if(!t){
+        return 0;
+    }
+    return tree(t.left) + t.value + tree(t.right)
+}
+
+console.log(tree(BST))
+
+// Answer: It totals the values of all the nodes in a binary search tree. For example, the BST above with nodes that each have a value of 1 returns 12.
+// The runtime of this algorithm is O(2^n). 
