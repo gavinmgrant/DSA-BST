@@ -166,7 +166,7 @@ const drill3b = bst => {
     return bst;
 }
 
-console.log(drill3b(BST));
+// console.log(drill3b(BST));
 
 // 4. What does this program do?
 // Without running this code in your code editor, explain what the following program does. 
@@ -183,7 +183,7 @@ function tree(t){
 // console.log(tree(BST))
 
 // Answer: It totals the values of all the nodes in a binary search tree. For example, the BST above with nodes that each have a value of 1 returns 12.
-// The runtime of this algorithm is O(2^n). 
+// The runtime of this algorithm is O(n^2). 
 
 // 5. Height of a BST
 // Write an algorithm to find the height of a binary search tree. What is the time complexity of your algorithm?
@@ -200,4 +200,41 @@ const heightFinder = bst => {
     }
 }
 
-console.log(heightFinder(BST));
+// console.log(heightFinder(BST));
+
+// Answer: The runtime of this algorithm is O(n^2).
+
+// 6. Is it a BST?
+// Write an algorithm to check whether an arbitrary binary tree is a binary search tree, assuming the tree does not contain duplicates.
+
+function checkBST(tree) {
+    if (!tree) {
+        return false;
+    }
+  
+    // if there is a right side, validate
+    if (tree.right) {
+        if (tree.right.key > tree.key) {
+            // recursive function to continue traversing the tree if right is greater than current key
+            checkBEST(tree.right);
+        } else {
+            // if right less than, it's not a binary search tree
+            return false;
+        }
+    }
+  
+    // if there is a left side, validate
+    if (tree.left) {
+        if (tree.left.key < tree.key) {
+            // recursive function to continue traversing the tree if left is less than current key
+            checkBST(tree.left);
+        } else {
+            // if left greater than, it's not a binary search tree
+            return false;
+        }
+    }
+  
+    return true;
+  }
+
+console.log(checkBST(BST));
