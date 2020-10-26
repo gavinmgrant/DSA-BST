@@ -180,7 +180,24 @@ function tree(t){
     return tree(t.left) + t.value + tree(t.right)
 }
 
-console.log(tree(BST))
+// console.log(tree(BST))
 
 // Answer: It totals the values of all the nodes in a binary search tree. For example, the BST above with nodes that each have a value of 1 returns 12.
 // The runtime of this algorithm is O(2^n). 
+
+// 5. Height of a BST
+// Write an algorithm to find the height of a binary search tree. What is the time complexity of your algorithm?
+
+const heightFinder = bst => {
+    if (!bst) {
+        return 0;
+    }
+    if (bst) {
+        let leftSide = heightFinder(bst.left);
+        let rightSide = heightFinder(bst.right);
+        let height = Math.max(leftSide, rightSide) + 1;
+        return height
+    }
+}
+
+console.log(heightFinder(BST));
