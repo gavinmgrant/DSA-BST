@@ -270,4 +270,24 @@ const kthLargest = (root, k) => {
     return sortedArr[k-1];
 }
 
-console.log(kthLargest(BST, 3));
+// console.log(kthLargest(BST, 3));
+
+// 8. Balanced BST
+// Write an algorithm that checks if a BST is balanced (i.e., a tree where no 2 leaves differ in distance from the root by more than 1).
+
+const checkBalanced = tree => {
+    if (!tree) {
+        return false;
+    }
+    // if there is only the root, then it's balanced
+    if (!tree.right && !tree.left) {
+        return true;
+    }
+    // if the difference between the two subtree heights is greater than 1, it's not balanced
+    if (Math.abs(heightFinder(tree.right) - heightFinder(tree.left)) > 1) {
+        return false;
+    }
+    return true;
+}
+
+console.log(checkBalanced(BST));
