@@ -130,6 +130,13 @@ class BinarySearchTree {
         }
         return this.left._findMin();
     }
+
+    _findMax() {
+        if (!this.right) {
+            return this;
+        }
+        return this.right._findMax();
+    }
 }
 
 const BST = new BinarySearchTree();
@@ -147,6 +154,7 @@ const drill3a = bst => {
     return bst;
 }
 
+drill3a(BST)
 // console.log(drill3a(BST));
 
 const drill3b = bst => {
@@ -207,7 +215,7 @@ const heightFinder = bst => {
 // 6. Is it a BST?
 // Write an algorithm to check whether an arbitrary binary tree is a binary search tree, assuming the tree does not contain duplicates.
 
-function checkBST(tree) {
+const checkBST = tree => {
     if (!tree) {
         return false;
     }
@@ -216,7 +224,7 @@ function checkBST(tree) {
     if (tree.right) {
         if (tree.right.key > tree.key) {
             // recursive function to continue traversing the tree if right is greater than current key
-            checkBEST(tree.right);
+            checkBST(tree.right);
         } else {
             // if right less than, it's not a binary search tree
             return false;
@@ -237,4 +245,29 @@ function checkBST(tree) {
     return true;
   }
 
-console.log(checkBST(BST));
+// console.log(checkBST(BST));
+
+// 7. 3rd largest node
+// Write an algorithm to find the 3rd largest node in a binary search tree.
+
+const kthLargest = (root, k) => {
+    let sortedArr = [];
+
+    // use recursion to traverse the tree and push keys into the sortedArr array
+    const dfs = node => {
+        // if the node is null, you have gone too far
+        if (!node) return;
+        // recursive call to check the node to the right of the current node
+        dfs(node.right);
+        // add the node keys as you go from largest to smallest key
+        sortedArr.push(node.key);
+        // now that the right nodes have been checked, traverse the left side
+        dfs(node.left);
+    }
+    // call the depth first search function
+    dfs(root);
+
+    return sortedArr[k-1];
+}
+
+console.log(kthLargest(BST, 3));
