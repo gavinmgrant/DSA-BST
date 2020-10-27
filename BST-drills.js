@@ -290,4 +290,49 @@ const checkBalanced = tree => {
     return true;
 }
 
-console.log(checkBalanced(BST));
+// console.log(checkBalanced(BST));
+
+// 9. Are they the same BSTs?
+// You are given two arrays which represent two sequences of keys that are used to create two binary search trees. 
+// Write a program that will tell whether the two BSTs will be identical or not without actually constructing the tree. 
+// You may use another data structure such as an array or a linked list but don't construct the BST. 
+// What is the time complexity of your algorithm? 
+// E.g., 3, 5, 4, 6, 1, 0, 2 and 3, 1, 5, 2, 4, 6, 0 are two sequences of arrays but will create the exact same BSTs and your program should return true.
+
+const sameCheck = (arr1, arr2) => {
+    // base cases to determine true or false
+    if (arr1.length !== arr2.length || arr1[0] !== arr2[0]) {
+        return false;
+    }
+    if (arr1.length === 0 || arr2.length === 0) {
+        return true;
+    }
+
+    const higher1 = [];
+    const higher2 = [];
+    const lower1 = [];
+    const lower2 = [];
+
+    // start iterating from the second index after the "root" of the BST array
+    for (let i = 1; i < arr1.length; i++) {
+        if (arr1[i] > arr1[0]) {
+            higher1.push(arr1[i]);
+        } else {
+            lower1.push(arr1[i]);
+        }
+    }
+    for (let i = 1; i < arr2.length; i++) {
+        if (arr2[i] > arr2[0]) {
+            higher2.push(arr2[i]);
+        } else {
+            lower2.push(arr2[i]);
+        }
+    }
+    
+    console.log('higher1 ', higher1, 'lower1 ', lower1, 'higher2 ', higher2, 'lower2 ', lower2);
+    return (sameCheck(higher1, higher2) && sameCheck(lower1, lower2));
+};
+
+const array1 = [3, 5, 4, 6, 1, 0, 2];
+const array2 = [3, 1, 5, 2, 4, 6, 0];
+console.log(sameCheck(array1, array2));
